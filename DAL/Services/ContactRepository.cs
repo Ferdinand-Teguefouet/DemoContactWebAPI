@@ -26,8 +26,8 @@ namespace DAL.Services
                 connection.Open();
                 using(SqlCommand cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "DELETE FROM Contact WHERE Id = @MonId";
-                    cmd.Parameters.AddWithValue("MonId", Id);
+                    cmd.CommandText = "DELETE FROM Contact WHERE Id = @MonId"; //@MonId est un paramètre SQL serveur
+                    cmd.Parameters.AddWithValue("MonId", Id); // ajouter le paramètre à la collection "Parameters"
 
                     cmd.ExecuteNonQuery();
                 }
@@ -42,13 +42,13 @@ namespace DAL.Services
                 connection.Open();
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT * FROM Contact";
+                    cmd.CommandText = "SELECT * FROM Contact"; // il est déconseillé d'utiliser * pour tout sélectionner
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            yield return new Contact
+                            yield return new Contact // yield permet de retoruner les enregistrements un par un
                             {
                                 Id = (int)reader["Id"],
                                 FirstName = reader["FirstName"].ToString(),
@@ -115,7 +115,7 @@ namespace DAL.Services
                 using (SqlCommand cmd = connection.CreateCommand())
                 {
                     cmd.CommandText = "UPDATE Contact SET LastName = @ln, FirstName = @fn, Email = @email" +
-                        " WHERE Id = @id";
+                        " WHERE Id = @id"; // marche mais attention!!!!!!
 
                     cmd.Parameters.AddWithValue("ln", c.LastName);
                     cmd.Parameters.AddWithValue("fn", c.FirstName);

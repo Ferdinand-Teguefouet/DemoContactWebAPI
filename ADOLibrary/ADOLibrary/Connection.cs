@@ -35,7 +35,7 @@ namespace ADOLibrary
             }
         }
 
-        // Méthode permettant de récupérer un enregistrement
+        // Méthode permettant de récupérer une valeur(ex: la donnée d'un champ spécifique)
         public object ExecuteScalar(Command cmd)
         {
             using(SqlConnection c = createConnection())

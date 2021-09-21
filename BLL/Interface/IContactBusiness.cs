@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BLL.Interface
 {
     public interface IContactBusiness<TEntity> 
-        where TEntity : new()
+        where TEntity : new() // le type TEntity doit avoir un constructeur sans paramètres
     {
         IEnumerable<TEntity> GetAll();
         TEntity GetById(int Id);
